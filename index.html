@@ -1,8 +1,259 @@
 <!DOCTYPE html>
 <html lang="es">
-<head><meta charset="utf-8"><title>Senekagames</title></head>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Juan Manuel Rivas García | Senior Unity 3D, VR y AR</title>
+<meta name="description" content="Portfolio de Juan Manuel Rivas García: realidad aumentada, realidad virtual, videojuegos, páginas web y smart watch con Unity 3D.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--sky1:#eef3fb;--sky2:#e2dcf7;--sky3:#f3f5f7;--panel:rgba(255,255,255,.82);--c1:15,110,122;--c2:130,80,230;--g1:rgba(15,110,122,.20);--g2:rgba(140,90,220,.16);--g3:rgba(255,170,90,.14);--dot:15,110,122;--bg:#f3f5f7;--surface:#fff;--ink:#1b2430;--muted:#55606e;--accent:#0f6e7a;--line:#d5dce3;--accent-ink:#fff}
+@media (prefers-color-scheme:dark){:root{--sky1:#04060d;--sky2:#1a0b3a;--sky3:#070b14;--panel:rgba(9,14,26,.80);--c1:80,220,255;--c2:255,90,200;--g1:rgba(79,195,209,.20);--g2:rgba(150,100,255,.22);--g3:rgba(255,140,170,.12);--dot:190,230,255;--bg:#0b1118;--surface:#18222b;--ink:#e8eef2;--muted:#9fb0bd;--accent:#4fc3d1;--line:#2a3945;--accent-ink:#06242a}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:linear-gradient(180deg,var(--sky1) 0%,var(--sky2) 58%,var(--sky3) 100%) fixed;color:var(--ink);font-family:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.6}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+#magic{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+header,main,footer{position:relative;z-index:1}
+header{max-width:1040px;margin:0 auto;padding:36px 24px 0}
+.brand{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;letter-spacing:-.02em;margin:0;line-height:1.1}
+.role{margin:6px 0 0;color:var(--muted);font-size:1.05rem}
+nav{display:flex;flex-wrap:wrap;gap:4px 22px;margin-top:26px;border-bottom:1px solid var(--line)}
+nav a{padding:10px 0;text-decoration:none;color:var(--muted);font-weight:600;border-bottom:3px solid transparent;margin-bottom:-1px}
+nav a:hover{color:var(--ink)}
+nav a[aria-current=page]{color:var(--ink);border-bottom-color:var(--accent)}
+main{width:min(1040px,calc(100% - 32px));margin:28px auto 0;padding:28px 32px 36px;background:var(--panel);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:18px}
+.hello h2{font-size:clamp(1.6rem,3vw,2.2rem);margin:0 0 4px}
+.hello p{margin:0;color:var(--muted);font-size:1.1rem}
+.item{display:grid;grid-template-columns:1fr 1.1fr;gap:36px;align-items:center;padding:44px 0;border-top:1px solid var(--line)}
+.hello+.item{margin-top:32px}
+.item:nth-child(even) .pic{order:2}
+.pic{display:flex;justify-content:center}
+.pic img{max-width:100%;max-height:420px;width:auto;height:auto;border-radius:10px;background:var(--surface);box-shadow:0 2px 14px rgba(0,0,0,.12)}
+.item h3{font-size:1.7rem;margin:0;letter-spacing:-.01em;line-height:1.2}
+.meta{margin:6px 0 14px;color:var(--muted);font-weight:600}
+.item p{margin:0 0 12px}
+.item ul{margin:0 0 16px;padding-left:20px}
+.item li{margin-bottom:4px}
+.btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.btn{display:inline-block;padding:10px 20px;border-radius:8px;font-weight:600;text-decoration:none;background:var(--accent);color:var(--accent-ink)}
+.btn.alt{background:transparent;color:var(--accent);box-shadow:inset 0 0 0 2px var(--accent)}
+.btn:hover{filter:brightness(1.1)}
+.cv{text-align:center;padding-top:32px}
+.cv img{max-width:min(446px,100%);height:auto;border-radius:8px;box-shadow:0 2px 14px rgba(0,0,0,.18)}
+.cv h3{font-size:1.5rem;margin:0 0 20px}
+footer{margin-top:40px;background:var(--panel);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--line);padding:28px 24px 40px;text-align:center;color:var(--muted)}
+footer .links{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 24px;margin-bottom:10px}
+footer p{margin:0;font-size:.95rem}
+@media (max-width:760px){main{padding:18px 18px 24px}.item{grid-template-columns:1fr;gap:20px;padding:32px 0}.item:nth-child(even) .pic{order:0}}
+</style>
+</head>
 <body>
-<h1>Senekagames</h1>
-<p>Contacto: juanmagamescontact@gmail.com</p>
+<canvas id="magic" aria-hidden="true"></canvas>
+<header>
+  <h1 class="brand">Juan Manuel Rivas García</h1>
+  <p class="role">Senior Unity 3D, VR y AR · <a href="mailto:juanmarg11@hotmail.es">juanmarg11@hotmail.es</a></p>
+  <nav id="nav" aria-label="Secciones">
+    <a href="#xr">XR</a>
+    <a href="#videojuegos">Videojuegos</a>
+    <a href="#web">Páginas web</a>
+    <a href="#smartwatch">Smart watch</a>
+    <a href="#cv">CV</a>
+  </nav>
+</header>
+
+<main id="main" tabindex="-1"></main>
+
+<footer>
+  <div class="links">
+    <a href="https://www.youtube.com/channel/UCl2068vef5l0pPDSYwYgjBg" target="_blank" rel="noopener">YouTube</a>
+    <a href="https://play.google.com/store/apps/developer?id=SenekaDev&hl=es" target="_blank" rel="noopener">Google Play</a>
+    <a href="https://www.linkedin.com/in/juan-manuel-rivas-garc%C3%ADa-604017192/" target="_blank" rel="noopener">LinkedIn</a>
+  </div>
+  <p>© Juan Manuel Rivas García · Senekagames</p>
+</footer>
+
+<script>
+var YT = "https://www.youtube.com/";
+function w(id){return "https://static.wixstatic.com/media/" + id + "/v1/fit/w_700,h_700,q_80/" + id;}
+
+var S = {
+  xr: {
+    hello: "Aquí podrás descubrir mis trabajos AR y VR",
+    items: [
+      {t:"Estanterías Record", k:"Realidad aumentada · Trabajo en empresa (ArVision)", img:"cdf450_0476cc4fe7b3439d9d8e04fb66b0862a~mv2.png",
+       d:"Optimiza y organiza tu almacén con nuestra innovadora app AR. Cuenta con tres funciones principales:",
+       l:["Catálogo: visualiza estanterías en tu espacio sin modificaciones.","Configurar módulos AR: personaliza y ajusta estanterías en tiempo real.","Configurar mi almacén: diseña la disposición de tu almacén con un plano ortogonal."],
+       v:YT+"watch?v=ZtR0-IPINGw"},
+      {t:"Cultuar", k:"Realidad aumentada · Trabajo en empresa (ArVision)", img:"cdf450_724c1fe96c5849d989d591cf50adff0c~mv2.png",
+       d:"Descubre puntos de interés turístico utilizando el geoposicionamiento de tu dispositivo de diferentes formas:",
+       l:["Escaneo de marcador: obtén información al escanear marcadores.","Escaneo de superficie: visualiza puntos de interés sobre superficies reales con AR.","Mapa AR: navega por un mapa interactivo en realidad aumentada."],
+       e:"¡Enriquece tu experiencia turística con nuestra innovadora aplicación de realidad aumentada!",
+       v:YT+"watch?v=03eBtfwAqMU"},
+      {t:"Simuladores sanitarios", k:"Realidad virtual · Trabajo en empresa (ArVision)", img:"cdf450_7d5f9db1cd6e469280e20470844a92bc~mv2.png",
+       d:"Aprende de forma interactiva y realista con nuestros simuladores de realidad virtual enfocados al ámbito sanitario. Practica procedimientos, mejora tus habilidades y enfréntate a situaciones reales con un sistema de puntuación que evalúa tu rendimiento y progreso.",
+       e:"¡Entrena, aprende y vive la experiencia sanitaria como nunca antes!",
+       v:YT+"watch?v=tkYKSmS_oxk"},
+      {t:"Sistema solar", k:"Realidad virtual", img:"cdf450_771b3a57cb2c4e3eb23aab97dd0e7f8f~mv2.png",
+       d:"¡Explora el sistema solar como nunca antes con nuestra innovadora aplicación de realidad virtual!",
+       l:["Interactúa con los planetas y explora sus características únicas.","Observa el sistema solar en una maqueta detallada y completamente interactiva.","Experimenta la inmensidad de cada planeta al verlos en tamaño real, directamente desde tu dispositivo."],
+       v:YT+"watch?v=v_pNChXOrkY"},
+      {t:"Face tracking", k:"Realidad aumentada", img:"cdf450_e22dcf08b3e94bc3828cc01f5736ce86~mv2.png",
+       d:"Personaliza tu look con nuestra app de face tracking que sigue tus expresiones en tiempo real. Puedes añadir y probar:",
+       l:["Elementos 3D","Elementos 2D"],
+       e:"La app detecta con precisión tus rasgos faciales y movimientos, brindándote una experiencia inmersiva, fluida y realista.",
+       v:YT+"shorts/5MrtXbs673I"},
+      {t:"Hand tracking", k:"Realidad aumentada", img:"cdf450_42f9488eb0e3417197a55e13438ef02d~mv2.png",
+       d:"Personaliza tu estilo con nuestra app AR que sigue el movimiento de tu mano. Puedes añadir y probar:",
+       l:["Relojes","Anillos"],
+       e:"La app detecta tanto la palma como el dorso de tu mano, brindándote una experiencia precisa y realista.",
+       v:YT+"shorts/dQqrCqtPhVM"},
+      {t:"Experiencia Cardboard", k:"Realidad virtual · Trabajo en empresa (ArVision)", img:"cdf450_1c8828bb967d4006a267caef558acc58~mv2.png",
+       d:"Sumérgete en una experiencia inmersiva con nuestra app VR para gafas Cardboard. Disfruta de:",
+       l:["Vídeos en 360º","Imágenes en 360º"],
+       e:"¡Experimenta una nueva dimensión de entretenimiento con nuestra aplicación de realidad virtual!",
+       v:YT+"watch?v=8BT-C833jrQ&t=123s"}
+    ]
+  },
+  videojuegos: {
+    hello: "Aquí podrás descubrir mis videojuegos",
+    items: [
+      {t:"Escape room: El acertijo final", k:"Ordenador", img:"cdf450_4995bc90aa49463e82bb4c9d80b4c741~mv2.jpg",
+       d:"Adéntrate en un escape room ambientado en un laboratorio abandonado de Chernobyl. El jugador deberá resolver enigmas y rompecabezas para avanzar en la historia y escapar antes de que se agote el tiempo.",
+       e:"¡Acepta el desafío y vive una experiencia emocionante e inmersiva!",
+       v:YT+"watch?v=rWSpa-FEI0M", dl:"https://escaperoomadj.itch.io/escape-room-el-acertijo-final"},
+      {t:"Streamers World", k:"Ordenador y móvil", img:"cdf450_02eb703cd11a429e998e843d0fd498ea~mv2.png",
+       d:"¿Quieres ser el influencer del momento? Escoge tu plataforma favorita, personaliza tu personaje y ¡consigue dinero y suscriptores! Puedes:",
+       l:["Grabar y publicar vídeos","Hacer directos","Colaborar con otros creadores"],
+       e:"¡Consigue nuevos ítems, skins y fans en tu camino a la fama!",
+       v:YT+"watch?v=l72XbiRgRy0"},
+      {t:"Portal Nebula", k:"Ordenador y móvil", img:"cdf450_b4be03846ac649cd9123842dfd025402~mv2.png",
+       d:"Un juego de acción rápida donde debes llegar al final de la pantalla esquivando obstáculos. Recoge el Cristal de Luz en cada nivel para abrir el Portal Final y avanzar.",
+       e:"¡Desafía tus reflejos y supera cada nivel!",
+       v:YT+"watch?v=aXvRmgjZIVY"},
+      {t:"C-Geometry", k:"Móvil", img:"cdf450_ebfef31cacac4e48a571e4a7e5b604cf~mv2.png",
+       d:"Defiende tu mando de los proyectiles enemigos disparando proyectiles con la misma forma geométrica. Comienzas con 5 vidas y debes alcanzar la puntuación objetivo para avanzar al siguiente nivel.",
+       e:"¡Demuestra tu habilidad y estrategia en este emocionante desafío!",
+       v:YT+"watch?v=cJt0wwBogts"},
+      {t:"Last Dragon", k:"Móvil", img:"cdf450_76e55bb8e16447059154cd69514a1a00~mv2.png",
+       d:"Enfrenta desafíos diurnos esquivando shurikens con agachadas y saltos, y por la noche, derrota al temible dragón final.",
+       e:"¡Alcanza tu máxima puntuación en este emocionante desafío ninja!",
+       v:YT+"watch?v=Z-zhlvnXgIQ"},
+      {t:"Frogger Street", k:"Móvil", img:"cdf450_9cd429d1c0564433981080850bd42d87~mv2.png",
+       d:"Ayuda a la rana a llegar al puerto evitando obstáculos como coches, troncos y otros peligros en su camino.",
+       e:"¡Supera los desafíos y lleva a la rana a salvo a su destino!",
+       v:YT+"watch?v=KK5RnOjRRUg"}
+    ]
+  },
+  web: {
+    hello: "Aquí podrás descubrir mis páginas web",
+    items: [
+      {t:"Qué Comemos", k:"Página web", img:"cdf450_7fb90038fb304ab9b9119d3267d06791~mv2.jpg",
+       d:"Qué Comemos es un planificador de comidas semanal que te ayuda a organizar qué cocinar cada día, compartir calendarios con otras personas y recibir recordatorios personalizados. También incluye sugerencias de platos para descubrir nuevas ideas y mantener una alimentación más variada.",
+       visit:"https://keen-haupia-6b85c0.netlify.app/"},
+      {t:"Mi colección de discos", k:"Página web", img:"cdf450_97258288a9fd498ca96d61dbb5da9c0c~mv2.png",
+       d:"Mi colección de CDs es una herramienta para catalogar y organizar tu colección de música. Permite añadir CDs con su título, artista y estilo, filtrarlos fácilmente y mantener una lista de discos que quieres conseguir. También puedes exportar tus colecciones a PDF.",
+       visit:"https://juanamsnk.github.io/Listado-CDs/"}
+    ]
+  },
+  smartwatch: {
+    hello: "Aquí podrás descubrir mis trabajos para smart watch",
+    items: [
+      {t:"Omnitrix", k:"Smart watch", img:"cdf450_9cd5d8efb7964ecd879b0286cdaef522~mv2.png",
+       d:"Experimenta el poder del Omnitrix en tu muñeca con nuestra aplicación. Gira el bisel rotativo para desbloquear y explorar todas las transformaciones disponibles.",
+       e:"¡Descubre un mundo de aventuras y poderes alienígenas con esta experiencia interactiva!",
+       v:YT+"shorts/vkT-8hLtFik"}
+    ]
+  }
+};
+
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;");}
+
+function item(p){
+  var h = '<article class="item"><div class="pic"><img loading="lazy" alt="Imagen de ' + esc(p.t) + '" src="' + w(p.img) + '" onerror="this.parentNode.style.display=\'none\'"></div><div>';
+  h += '<h3>' + esc(p.t) + '</h3><p class="meta">' + esc(p.k) + '</p><p>' + esc(p.d) + '</p>';
+  if (p.l) h += '<ul>' + p.l.map(function(x){return '<li>' + esc(x) + '</li>';}).join('') + '</ul>';
+  if (p.e) h += '<p>' + esc(p.e) + '</p>';
+  h += '<div class="btns">';
+  if (p.v) h += '<a class="btn" href="' + p.v + '" target="_blank" rel="noopener">Ver vídeo</a>';
+  if (p.dl) h += '<a class="btn alt" href="' + p.dl + '" target="_blank" rel="noopener">Descargar</a>';
+  if (p.visit) h += '<a class="btn" href="' + p.visit + '" target="_blank" rel="noopener">Visitar</a>';
+  return h + '</div></div></article>';
+}
+
+function cv(){
+  return '<section class="cv"><h2 style="font-size:clamp(1.6rem,3vw,2.2rem);margin:0 0 24px">Curriculum vitae</h2>' +
+    '<a href="https://6afadc2e-2b1e-4348-8959-155ecc7d30af.filesusr.com/ugd/cdf450_d5a468b780b44ed590b797e82cb593a6.pdf" target="_blank" rel="noopener">' +
+    '<img alt="Primera página del currículum, abre el PDF" src="https://static.wixstatic.com/media/cdf450_7ec6dae659a84a82bce20e04a0f52322~mv2.jpg/v1/fit/w_700,h_950,q_80/cdf450_7ec6dae659a84a82bce20e04a0f52322~mv2.jpg"></a>' +
+    '<div class="btns" style="justify-content:center"><a class="btn" href="https://6afadc2e-2b1e-4348-8959-155ecc7d30af.filesusr.com/ugd/cdf450_d5a468b780b44ed590b797e82cb593a6.pdf" target="_blank" rel="noopener">Abrir CV en PDF</a>' +
+    '<a class="btn alt" href="https://www.youtube.com/channel/UCl2068vef5l0pPDSYwYgjBg" target="_blank" rel="noopener">Demo reel en YouTube</a></div></section>';
+}
+
+function render(){
+  var key = (location.hash || "#xr").slice(1);
+  if (key !== "cv" && !S[key]) key = "xr";
+  var main = document.getElementById("main");
+  if (key === "cv") main.innerHTML = cv();
+  else main.innerHTML = '<div class="hello"><h2>¡Hola!</h2><p>' + S[key].hello + '</p></div>' + S[key].items.map(item).join('');
+  document.querySelectorAll("#nav a").forEach(function(a){
+    if (a.getAttribute("href") === "#" + key) a.setAttribute("aria-current","page"); else a.removeAttribute("aria-current");
+  });
+  document.title = "Juan Manuel Rivas García | " + document.querySelector('#nav a[aria-current]').textContent;
+}
+window.addEventListener("hashchange", function(){render(); window.scrollTo(0,0);});
+render();
+
+(function(){
+  var c=document.getElementById("magic"),x=c.getContext("2d"),W,H,dpr=Math.min(devicePixelRatio||1,2),mx=0,my=0,tx=0,ty=0,off=0;
+  var still=matchMedia("(prefers-reduced-motion:reduce)").matches,PHI=(1+Math.sqrt(5))/2,S=[];
+  function v(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim();}
+  function mk(V){var d=1e9,i,j,E=[];
+    for(i=0;i<V.length;i++)for(j=i+1;j<V.length;j++){var q=Math.hypot(V[i][0]-V[j][0],V[i][1]-V[j][1],V[i][2]-V[j][2]);if(q<d)d=q;}
+    for(i=0;i<V.length;i++)for(j=i+1;j<V.length;j++){var r=Math.hypot(V[i][0]-V[j][0],V[i][1]-V[j][1],V[i][2]-V[j][2]);if(Math.abs(r-d)<.01)E.push([i,j]);}
+    return {V:V,E:E};}
+  var G={cube:[],octa:[[1,0,0],[-1,0,0],[0,1,0],[0,-1,0],[0,0,1],[0,0,-1]],ico:[]},a,b,e;
+  for(a=-1;a<=1;a+=2)for(b=-1;b<=1;b+=2){G.cube.push([a,b,1],[a,b,-1]);G.ico.push([0,a,b*PHI],[a,b*PHI,0],[a*PHI,0,b]);}
+  G.cube=mk(G.cube);G.octa=mk(G.octa);G.ico=mk(G.ico);
+  var kinds=["ico","cube","octa","ico","octa","cube","ico"],pos=[[.12,.2],[.86,.16],[.3,.42],[.7,.4],[.5,.1],[.95,.45],[.04,.45]];
+  function size(){W=innerWidth;H=innerHeight;c.width=W*dpr;c.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0);
+    var n=W<700?4:7;S=[];
+    for(var i=0;i<n;i++)S.push({g:G[kinds[i]],px:pos[i][0],py:pos[i][1],r:(W<700?26:34)+i%3*12,rx:Math.random()*6,ry:Math.random()*6,sx:(Math.random()*.004+.002),sy:(Math.random()*.005+.002),ph:Math.random()*6.28,k:i%2});}
+  function proj(p,cx,cy,sc,rx,ry){var X=p[0],Y=p[1],Z=p[2],c1=Math.cos(ry),s1=Math.sin(ry),t=X*c1+Z*s1;Z=-X*s1+Z*c1;X=t;
+    c1=Math.cos(rx);s1=Math.sin(rx);t=Y*c1-Z*s1;Z=Y*s1+Z*c1;Y=t;var k=4/(4+Z);return [cx+X*sc*k,cy+Y*sc*k];}
+  function draw(tm){
+    var c1=v("--c1"),c2=v("--c2"),dark=matchMedia("(prefers-color-scheme:dark)").matches,hz=H*.58,i,k,f,y;
+    tx+=(mx-tx)*.05;ty+=(my-ty)*.05;
+    x.clearRect(0,0,W,H);
+    // brillo del horizonte
+    var g=x.createLinearGradient(0,hz-90,0,hz+30);g.addColorStop(0,"rgba("+c2+",0)");g.addColorStop(.7,"rgba("+c2+","+(dark?.35:.22)+")");g.addColorStop(1,"rgba("+c1+",0)");
+    x.fillStyle=g;x.fillRect(0,hz-90,W,120);
+    // suelo en perspectiva
+    var vx=W/2+tx*30;x.lineWidth=1;
+    x.strokeStyle="rgba("+c1+","+(dark?.55:.4)+")";
+    var n=18;
+    for(i=-n;i<=n;i++){x.beginPath();x.moveTo(vx+i*14,hz);x.lineTo(W/2+i*W*.09+tx*60,H);x.stroke();}
+    for(k=0;k<16;k++){f=((k+off)%16)/16;y=hz+(H-hz)*Math.pow(f,2.3);
+      x.strokeStyle="rgba("+c1+","+(.08+f*(dark?.55:.4)).toFixed(2)+")";x.beginPath();x.moveTo(0,y);x.lineTo(W,y);x.stroke();}
+    x.strokeStyle="rgba("+c1+",.9)";x.lineWidth=1.5;x.beginPath();x.moveTo(0,hz);x.lineTo(W,hz);x.stroke();
+    // formas 3D flotantes
+    x.lineWidth=1.3;x.lineJoin="round";
+    for(i=0;i<S.length;i++){var s=S[i],col=s.k?c2:c1,cx=s.px*W+tx*(18+i*6),cy=s.py*H+Math.sin(tm/1500+s.ph)*10+ty*(10+i*4);
+      var P=s.g.V.map(function(q){return proj(q,cx,cy,s.r,s.rx,s.ry);});
+      x.strokeStyle="rgba("+col+","+(dark?.85:.6)+")";
+      if(dark){x.shadowColor="rgba("+col+",.9)";x.shadowBlur=8;}
+      x.beginPath();s.g.E.forEach(function(e){x.moveTo(P[e[0]][0],P[e[0]][1]);x.lineTo(P[e[1]][0],P[e[1]][1]);});x.stroke();
+      x.shadowBlur=0;
+      if(!still){s.rx+=s.sx;s.ry+=s.sy;}
+    }
+    if(!still){off+=.012;requestAnimationFrame(draw);}
+  }
+  addEventListener("pointermove",function(e){mx=e.clientX/W-.5;my=e.clientY/H-.5;});
+  size();requestAnimationFrame(draw);
+  addEventListener("resize",function(){size();if(still)requestAnimationFrame(draw);});
+})();
+</script>
 </body>
 </html>
